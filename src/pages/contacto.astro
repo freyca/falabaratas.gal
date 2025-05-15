@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import Button from "../components/Atoms/Button.astro";
 import { sendEmail } from "../actions/sendEmail";
 import { validateForm } from "../actions/validateForm";
+import Instagram from "../../public/svg/instagram.svg";
 
 // In GET requests need to check if there is any url param, so we can give
 // feedback to the user
@@ -76,7 +77,14 @@ if (Astro.request.method === "POST") {
                             Houbo un erro enviando a mensaxe.
                             <br />
                             <br />
-                            Téntao de novo ou escríbenos por instagram.
+                            Téntao de novo ou escríbenos por
+                            <a
+                                href="https://www.instagram.com/falabaratas.gal/"
+                                class="underline"
+                            >
+                                <Instagram class="ml-1 inline-block" />
+                                Instagram
+                            </a>
                         </p>
                     )}
                 </div>
