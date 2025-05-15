@@ -1,0 +1,138 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Button from "../components/Atoms/Button.astro";
+import { sendEmail } from "../actions/sendEmail";
+import { validateForm } from "../actions/validateForm";
+
+// In GET requests need to check if there is any url param, so we can give
+// feedback to the user
+const mailStatus = Astro.url.searchParams.get("success");
+let mailSuccess = false;
+let mailFailure = false;
+
+if (mailStatus !== null) {
+    if (mailStatus === "true") {
+        mailSuccess = true;
+    } else {
+        mailFailure = true;
+    }
+}
+
+// If is a POST request, we should send an email
+if (Astro.request.method === "POST") {
+    try {
+        const data = await Astro.request.formData();
+
+        validateForm(
+            data.get("username"),
+            data.get("email"),
+            data.get("message"),
+        );
+
+        const emailStatus = await sendEmail(
+            data.get("username"),
+            data.get("email"),
+            data.get("message"),
+        );
+
+        if (emailStatus) {
+            return Astro.redirect("/contacto?success=true");
+        }
+
+        return Astro.redirect("/contacto?success=false");
+    } catch (error) {
+        if (error instanceof Error) {
+            console.error(error.message);
+        }
+
+        return Astro.redirect("/contacto?success=false");
+    }
+}
+---
+
+<Layout>
+    {
+        mailStatus && (
+            <div class="flex justify-center">
+                <div
+                    class="bg-gradient-to-br to-purple-950/95 py-8 px-10 rounded shadow-2xl/90 shadow-purple-800/90 inline-block"
+                    class:list={[
+                        {
+                            "from-emerald-900/90": mailSuccess,
+                            "from-rose-900/90": mailFailure,
+                        },
+                    ]}
+                >
+                    {mailSuccess && (
+                        <p class="text-center font-bold font-xl leading-md">
+                            Moitas grazas pola túa mensaxe, poñémonos en
+                            contacto contigo en breve!
+                            <br />
+                            <br />
+                        </p>
+                    )}
+                    {mailFailure && (
+                        <p class="text-center font-bold font-xl leading-md">
+                            Houbo un erro enviando a mensaxe.
+                            <br />
+                            <br />
+                            Téntao de novo ou escríbenos por instagram.
+                        </p>
+                    )}
+                </div>
+            </div>
+        )
+    }
+
+    <h1 class="text-3xl font-bold text-center mt-12 mb-8">Escríbenos!</h1>
+    <form
+        class="max-w-lg mx-auto bg-gradient-to-tr bg-purple-950 to-gray-950/90 rounded-md px-10 pt-10 pb-8 mb-4 md:shadow-2xl shadow-purple-900/95"
+        method="POST"
+        action="/contacto"
+    >
+        <div class="mb-6">
+            <label class="block text-sm font-bold mb-4" for="username">
+                Nome:
+            </label>
+            <input
+                class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+                id="username"
+                type="text"
+                name="username"
+                minlength="3"
+                placeholder="Como te chamas?"
+                required
+            />
+        </div>
+        <div class="mb-6">
+            <label class="block text-sm font-bold mb-4" for="email">
+                Email:
+            </label>
+            <input
+                class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+                id="email"
+                type="email"
+                name="email"
+                minlength="6"
+                placeholder="Onde che escribo de volta?"
+                required
+            />
+        </div>
+        <div class="mb-6">
+            <label class="block text-sm font-bold mb-4" for="message">
+                Mensaxe:
+            </label>
+            <textarea
+                rows="6"
+                class="shadow appearance-none border rounded w-full py-2 px-3 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                id="message"
+                name="message"
+                minlength="15"
+                placeholder="Quéntanos a orella!"
+                required></textarea>
+        </div>
+        <div class="flex justify-end">
+            <Button buttonText="Enviar" type="submit" />
+        </div>
+    </form>
+</Layout>

@@ -1,0 +1,26 @@
+---
+import Layout from "../layouts/Layout.astro";
+import WorkCard from "../components/WorkCard.astro";
+import { getCollection } from "astro:content";
+
+const works = await getCollection("works");
+---
+
+<Layout>
+    <div class="grid md:grid-cols-2 gap-10 container mt-12">
+        {
+            works.map((work) => {
+                const { slug, data } = work;
+                const { title, description, image } = data;
+
+                return (
+                    <WorkCard
+                        image={image}
+                        title={title}
+                        description={description}
+                    />
+                );
+            })
+        }
+    </div>
+</Layout>

@@ -1,0 +1,37 @@
+---
+import "../styles/global.css";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import LogoFalabaratas from "../../public/img/designs/logo_falabaratas.svg";
+---
+
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" type="image/svg+xml" href="/favicon_falabaratas.jpg" />
+        <title>Falabaratas.gal - Acontravento está tremendo</title>
+    </head>
+    <body
+        class="text-gray-200 min-h-screen rounded-full bg-radial-[at_50%_50%] from-fuchsia-950/99 via-purple-950/99 to-gray-900/90"
+    >
+        <div class="opacity-100 blur-0">
+            <Navbar />
+
+            <section class="m-6 md:mb-20 flex justify-center">
+                <LogoFalabaratas id="logo" fill="none" stroke="white" />
+            </section>
+
+            <div class="container mx-auto px-8">
+                <slot />
+            </div>
+            <Footer />
+        </div>
+    </body>
+
+    <script>
+        import {} from "../lib/animateSections";
+        import {} from "../lib/animateLogo";
+    </script>
+</html>

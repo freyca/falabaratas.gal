@@ -1,0 +1,12 @@
+[Unit]
+Description=Start falabaratas backend
+
+[Service]
+User=sanju
+Group=sanju
+Type=simple
+ExecStart=/home/sanju/.nvm/versions/node/v23.11.0/bin/node /home/sanju/web/falabaratas.cuentamemilongas.com/public_html/dist/server/entry.mjs
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

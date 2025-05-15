@@ -1,0 +1,88 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout>
+    <div class="prose prose-invert mx-auto">
+        <section class="relative">
+            <img
+                class="w-full rounded-md shadow-2xl shadow-white/50"
+                src="/tremendo_piquetaso.jpeg"
+            />
+            <h1
+                class="absolute text-lg text-white/90 bottom-5 left-5 bg-linear-65 from-fuchsia-900/70 to-purple-900/80 p-2 rounded-md"
+            >
+                O falar non ten cancelas
+            </h1>
+        </section>
+
+        <section class="text-pretty">
+            <p>
+                <b>Falabaratas.gal</b> é unha marca única que reflicte a paixón por
+                crear produtos con alma e estilo.
+            </p>
+
+            <p>
+                A súa proposta abarca roupa, pegatinas, sacas de algodón
+                orgánico e unha gran variedade de complementos, cun toque
+                persoal e creativo.
+            </p>
+
+            <p>
+                Detrás de cada deseño está a súa fundadora, quen, ademais de ser
+                unha amante do skate, tamén adora quentar a orella e disfrutar
+                da vida de forma libre e auténtica.
+            </p>
+            <img
+                class="rounded-md shadow-2xl shadow-white/50"
+                src="/chulinos_ao_sol.jpeg"
+                alt="Modelos de falabaratas presumindo de camisola"
+            />
+            <p>
+                A esencia de Falabaratas reside na combinación de moda,
+                sustentabilidade e unha vibra xitosa e rebelde. A marca destaca
+                polo uso de materiais como o algodón orgánico, comprometéndose
+                cunha producción respetuosa co medio ambiente sen renunciar a un
+                estilo urbano e moderno. As súas pezas non son só roupa ou
+                accesorios; son expresións de personalidade, ideais para aquelas
+                persoas que buscan algo máis que o habitual.
+            </p>
+            <p>
+                As chapas, tan características de Falabaratas, destacan por ter
+                deseños divertidos e cargados de actitude, facendo que cada
+                usuario poida levar un pequeno pedazo de arte personalizado.
+            </p>
+            <p class="">
+                A marca tamén é coñecida polas súas sacas e pegatinas, que se
+                converteron en pezas populares entre aqueles que buscan adornar
+                as súas pertenzas cun toque único. A través do seu
+                <a
+                    href="https://www.instagram.com/falabaratas.gal/"
+                    class="no-underline">Instagram</a
+                >, Falabaratas transmite esa enerxía desenfadada e creativa que
+                define a súa proposta.
+            </p>
+            <p>
+                Cada publicación é unha invitación a un estilo de vida cheo de
+                liberdade, confianza e unha boa dose de humor. Sen dúbida,
+                Falabaratas é moito máis que unha marca de roupa, é unha forma
+                de expresarse, de sentirse único e de apoiar a moda consciente.
+            </p>
+        </section>
+
+        <section
+            x-data="{ show: false }"
+            id="pita-skater-container-large-devices"
+            class="fixed top-3/5 right-0 hidden w-72 opacity-0 lg:block transform transition-all delay-600 duration-2000 ease-in-out"
+            :class="{'-translate-x-full opacity-100': open}"
+        >
+            <img
+                id="pita-skater-nav"
+                src="/img/designs/pita_skater_sin_fondo.png"
+                alt="Pita skater"
+                class="mt-10 mx-auto h-64"
+                loading="lazy"
+            />
+        </section>
+    </div>
+</Layout>

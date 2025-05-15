@@ -1,0 +1,122 @@
+---
+export function websitePaths() {
+    return [
+        { href: "/", name: "Inicio" },
+        { href: "/traballos", name: "Traballos" },
+        { href: "/contacto", name: "Contacto" },
+    ];
+}
+---
+
+<header
+    class="lg:bg-linear from-fuchsia-950 to-gray-900 text-gray-200 py-6 md:mb-4"
+>
+    <div class="container mx-auto flex items-center">
+        <!-- Enlaces de la barra de navegación -->
+        <nav class="hidden lg:flex mx-auto">
+            <ul class="flex space-x-8">
+                {
+                    websitePaths().map((path) => (
+                        <a href={path.href} class="hover:text-gray-300">
+                            <li class="p-4 rounded hover:bg-gradient-to-t hover:from-fuchsia-900/95 hover:to-purple-900/95 border-b-2 border-gray-200">
+                                {path.name}
+                            </li>
+                        </a>
+                    ))
+                }
+            </ul>
+        </nav>
+
+        <!-- Botón hamburguesa para abrir menu en movil -->
+        <nav x-data="{ open: false }">
+            <div class="fixed top-8 right-8 lg:hidden z-50">
+                <button
+                    id="show-menu"
+                    class="{text-gray-200 focus:outline-none"
+                    x-on:click="open = !open"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Menu en movil -->
+            <div
+                id="mobile-menu"
+                class="lg:hidden fixed inset-0 bg-radial-[at_50%_50%] from-fuchsia-950 via-purple-950 to-gray-900 z-50 transform transition-all duration-400 ease-in-out hidden"
+                :class="{'translate-x-0 opacity-100': open, 'translate-x-full opacity-0': !open}"
+            >
+                <!-- Botón para cerrar el menu -->
+                <div class="flex justify-end pt-8 pr-8">
+                    <button
+                        id="close-menu"
+                        class="text-gray-200"
+                        x-on:click="open = !open"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-6 w-6"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Enlaces menu movil -->
+                <ul
+                    class="flex flex-col items-center space-y-6 text-gray-200 py-12"
+                >
+                    {
+                        websitePaths().map((path) => (
+                            <li class="p-2 rounded border-b-2 border-gray-200">
+                                <a href={path.href} class="text-3xl">
+                                    {path.name}
+                                </a>
+                            </li>
+                        ))
+                    }
+                </ul>
+                <div class="relative w-full mx-auto">
+                    <div
+                        id="pita-skater-container"
+                        class="absolute top-0 transform transition-transform delay-50 duration-1100 ease-in-out"
+                        :class="{'translate-x-200': !open, 'translate-x-60': open}"
+                    >
+                        <img
+                            id="pita-skater-nav"
+                            src="/img/designs/pita_skater_sin_fondo.png"
+                            alt="Pita skater"
+                            class="mt-10 mx-auto h-64"
+                            loading="lazy"
+                        />
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<script>
+    // Use this to avoid flash mobile menu
+    setTimeout(() => {
+        document.querySelector("#mobile-menu")?.classList.remove("hidden");
+    }, 1000);
+</script>
