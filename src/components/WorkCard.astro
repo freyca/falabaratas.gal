@@ -2,13 +2,13 @@
 const { image, title, description } = Astro.props;
 ---
 
-<article class="prose prose-invert">
+<article class="prose prose-invert scrolling-section opacity-0">
     <img
         src={`/${image}`}
         alt={title}
         class="rounded-4xl transition-transform hover:scale-110 duration-300 ease-in-out shadow-2xl shadow-purple-800/90"
     />
-    <div class="justify-center scrolling-section">
+    <div class="justify-center card">
         <h2 class="text-2xl font-bold leading-tight">
             {title}
         </h2>
