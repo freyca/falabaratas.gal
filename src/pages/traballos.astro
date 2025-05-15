@@ -7,7 +7,7 @@ const works = await getCollection("works");
 ---
 
 <Layout>
-    <div class="grid md:grid-cols-2 gap-10 container mt-12">
+    <div class="grid md:grid-cols-2 gap-10 container mt-6">
         {
             works.map((work) => {
                 const { slug, data } = work;
