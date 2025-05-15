@@ -2,7 +2,7 @@ export function validateForm(
     name: any,
     userEmail: any,
     text: any,
-): boolean {
+): true {
     const errors = { name: "", userEmail: "", text: "" };
 
     if (typeof name !== "string" || name.length < 3) {
