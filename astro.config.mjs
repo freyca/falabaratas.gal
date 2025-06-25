@@ -23,12 +23,12 @@ export default defineConfig({
     },
     env: {
         schema: {
-            SMTP_HOST: envField.string({ context: "server", access: "secret", default: 'localhost' }),
-            SMTP_PORT: envField.number({ context: "server", access: "secret", default: 25 }),
-            SMTP_USERNAME: envField.string({ context: "server", access: "secret", default: '' }),
-            SMTP_PASSWORD: envField.string({ context: "server", access: "secret", default: '' }),
-            SMTP_SECURE: envField.boolean({ context: "server", access: "secret", default: false }),
-            SMTP_DESTINATION: envField.string({ context: "server", access: "secret", default: '' }),
+            SMTP_HOST: envField.string({ context: "server", access: "public", default: 'localhost' }),
+            SMTP_PORT: envField.number({ context: "server", access: "public", default: 25 }),
+            SMTP_USERNAME: envField.string({ context: "server", access: "public", default: '' }),
+            SMTP_PASSWORD: envField.string({ context: "server", access: "public", default: '' }),
+            SMTP_SECURE: envField.boolean({ context: "server", access: "public", default: false }),
+            SMTP_DESTINATION: envField.string({ context: "server", access: "public", default: '' }),
         }
     }
 });

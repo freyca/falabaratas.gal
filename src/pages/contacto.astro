@@ -1,8 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Button from "../components/Atoms/Button.astro";
-import { sendEmail } from "../actions/sendEmail";
-import { validateForm } from "../actions/validateForm";
 import Instagram from "../../public/svg/instagram.svg";
 
 // In GET requests need to check if there is any url param, so we can give
@@ -13,27 +11,6 @@ let mailSuccess = false;
 mailStatus !== null && mailStatus === "true"
     ? (mailSuccess = true)
     : (mailSuccess = false);
-
-// If is a POST request, we should send an email
-if (Astro.request.method === "POST") {
-    try {
-        const data = await Astro.request.formData();
-        const [username, email, message] = data.values();
-
-        validateForm(username, email, message);
-        const emailStatus = await sendEmail(username, email, message);
-
-        return emailStatus
-            ? Astro.redirect("/contacto?success=true")
-            : Astro.redirect("/contacto?success=false");
-    } catch (error) {
-        if (error instanceof Error) {
-            console.error(error.message);
-        }
-
-        return Astro.redirect("/contacto?success=false");
-    }
-}
 ---
 
 <Layout>
@@ -81,7 +58,7 @@ if (Astro.request.method === "POST") {
     <form
         class="max-w-lg mx-auto bg-gradient-to-tr bg-purple-950 to-gray-950/90 rounded-md px-10 pt-10 pb-8 mb-4 md:shadow-2xl shadow-purple-900/95"
         method="POST"
-        action="/contacto"
+        action="/sendEmail.json"
     >
         <div class="mb-6">
             <label class="block text-sm font-bold mb-4" for="username">
