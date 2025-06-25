@@ -15,8 +15,6 @@ export const POST: APIRoute = async ({ request }) => {
             validateForm(username, email, message);
             const emailStatus = await sendEmail(username, email, message);
 
-            console.log(emailStatus);
-
             if (emailStatus) {
                 redirectDestination = "contacto?success=true";
             }
